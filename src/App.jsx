@@ -81,10 +81,24 @@ const cases = [
     metrics: [{ v: "6-Phase", k: "Launch Strategy" }, { v: "5", k: "Experiments" }, { v: "3", k: "Audiences" }],
     problem: "Musicians without traditional production skills have no clear path from lyric to album. Built a full product strategy for Quantum Sleep — a real AI-assisted music project shipping to Spotify, Apple Music, and YouTube Music — doubling as a PM artifact demonstrating ethical AI positioning, GTM design, and experimentation frameworks.",
     bullets: [
-      "Human-written lyrics + AI-generated music/vocals via Aimusicgen.ai — transparent authorship model and trust framework as core product narrative.",
+      "Human-written lyrics + AI-generated music/vocals,via Aimusicgen.ai — transparent authorship model and trust framework as core product narrative.",
       "6-phase launch: album release → public PRD → social promotion → AI engine comparison content → Spanglish bilingual album → creator playbook.",
       "Analytics plan across 7 metric areas; 5-experiment A/B roadmap covering thumbnail design, AI framing, and bilingual audience positioning.",
-      "GTM spanning Spotify, YouTube Music, Apple Music, LinkedIn PM coified AI vision.",
+      "GTM spanning Spotify, YouTube Music, Apple Music, LinkedIn PM communities, and AI creator channels.",
+    ],
+    tags: ["Product Strategy", "Ethical AI", "GTM", "A/B Testing", "Spotify", "AI Music Gen"],
+    pdfUrl: "/docs/quantum-sleep-prd.pdf",
+    pdfLabel: "Full PRD",
+  },
+];
+
+const experiences = [
+  {
+    role: "Senior PM – AI Platform", co: "CargoSprint · Miami, FL", period: "July 2025–Present",
+    bullets: [
+      "Led company-wide AI transformation targeting 25% revenue growth — LLM-powered cargo network, intelligent routing, predictive analytics.",
+      "Built AI roadmap from scratch, set org-wide model KPIs, evaluation criteria, production monitoring standards.",
+      "Aligned engineering, data science, and C-suite around unified AI vision.",
     ],
     tags: ["LLMs", "Generative AI", "OKRs", "API-First"],
     current: true,
@@ -587,20 +601,6 @@ function SkillsSlide() {
 }
 
 // ─── CONTACT SLIDE ────────────────────────────────────────────────────────────
-             <div style={{ fontSize: 10, color: A, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", marginBottom: 12, paddingBottom: 8, borderBottom: "1px solid rgba(255,77,0,0.12)" }}>{lbl}</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                  {items.map(t => <Chip key={t} label={t} />)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── CONTACT SLIDE ────────────────────────────────────────────────────────────
 
 function ContactSlide() {
   const [sent, setSent] = useState(false);
@@ -857,4 +857,3 @@ export default function Portfolio() {
     </div>
   );
 }
- 
