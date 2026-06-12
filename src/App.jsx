@@ -18,7 +18,9 @@ const cases = [
     metrics:[{v:"50%",k:"Faster Reporting"},{v:"35%",k:"Decision Speed"},{v:"99.5%",k:"Uptime Target"}],
     problem:"Healthcare operators had disconnected systems — no unified layer across operational, financial, and patient risk data. Reporting was manual; proactive risk management near-impossible.",
     bullets:["7 patient data points: Demographics, Enrollment, Utilization, Medical Condition, Labs, Costs, Risk Extract.","Trainable weighted scoring model with configurable data clustering and flexible scheduling.","Label generation (risk 1–5) → score change alerts → reports → external BI push → recommended actions.","Role-based dashboards for Admin, Finance, Ops, Clinician, Executive, Analyst + Amazon Q AI assistant."],
-    tags:["React","FastAPI","PostgreSQL","AWS Lambda","TensorFlow","Amazon Q","HIPAA","RBAC"]
+    tags:["React","FastAPI","PostgreSQL","AWS Lambda","TensorFlow","Amazon Q","HIPAA","RBAC"],
+    pdfUrl:"/docs/ai-model-flow.pdf",
+    pdfLabel:"AI Model Flow Diagram"
   },
   {
     num:"03", label:"E-Commerce · API", bg:"#2d1200",
@@ -35,6 +37,26 @@ const cases = [
     problem:"Incompatible rollout risk profiles — large chains needed deep custom config; small franchisees needed fast MVP deployment. One process would cause bottlenecks and timeline failures.",
     bullets:["WG1 (Large): Dedicated environments, custom features, pilot store parallel POS operation, ledger reconciliation, then mass rollout.","WG2 (Small/Regional): Regional environment groupings, core MVP features, mass rollout with transaction monitoring and triage.","3 risk phases: Sales (scope/pricing), Config (requirements accuracy, training), Install (downtime, data reconciliation).","Post-implementation: CRM per environment, cyclic audits, dedicated support channel."],
     tags:["Rollout Strategy","Risk Management","POS Systems","QA Planning","CRM","Data Reconciliation"]
+  },
+  {
+    num:"05", label:"AI/ML · PRD", bg:"#0d1526",
+    title:"Agentic AI Platforms — Production PRD",
+    metrics:[{v:"−30%",k:"Driver Dwell Time"},{v:">85%",k:"Dock Utilization"},{v:"+20%",k:"Booking Conversion"}],
+    problem:"No production-grade agentic AI blueprint existed for high-frequency operational verticals. Authored two complete PRDs — autonomous warehouse dock scheduling and B2C travel dynamic packaging — with full capability matrices, technical constraints, system flows, and engine architecture recommendation.",
+    bullets:["Warehouse Agent: autonomous carrier booking via email/SMS/portal, dynamic slot re-optimization on real-time events, −80% manual scheduling tasks, −40% detention & demurrage fees.","Travel Agent: conversational NLP concierge, multi-GDS/bedbank dynamic packaging, opaque margin optimization, +20% booking conversion, −50% search-to-book time.","System flow diagrams for both agents: tool calls, API integrations, confirmation loops, external system updates.","Engine build strategy: evaluated fully custom, PaaS (AWS Bedrock/Vertex AI), and hybrid — recommended LangGraph/AutoGen orchestration layer with managed LLM and proprietary API integrations as IP."],
+    tags:["Agentic AI","LLMs","WMS/TMS APIs","GDS/Bedbanks","LangGraph","PRD Authorship"],
+    pdfUrl:"/docs/agentic-ai-prd.pdf",
+    pdfLabel:"Full PRD"
+  },
+  {
+    num:"06", label:"Creative · PM Artifact", bg:"#0f0a1a",
+    title:"Quantum Sleep — AI-Assisted Album PRD",
+    metrics:[{v:"6-Phase",k:"Launch Strategy"},{v:"5",k:"Experiments"},{v:"3",k:"Audiences"}],
+    problem:"Musicians without traditional production skills have no clear path from lyric to album. Built a full product strategy for Quantum Sleep — a real AI-assisted music project shipping to Spotify, Apple Music, and YouTube Music — doubling as a PM artifact demonstrating ethical AI positioning, GTM design, and experimentation frameworks.",
+    bullets:["Human-written lyrics + AI-generated music/vocals via Aimusicgen.ai — transparent authorship model and trust framework as core product narrative.","6-phase launch: album release → public PRD → social promotion → AI engine comparison content → Spanglish bilingual album → creator playbook.","Analytics plan across 7 metric areas; 5-experiment A/B roadmap covering thumbnail design, AI framing, and bilingual audience positioning.","GTM spanning Spotify, YouTube Music, Apple Music, LinkedIn PM communities, and AI creator channels."],
+    tags:["Product Strategy","Ethical AI","GTM","A/B Testing","Spotify","AI Music Gen"],
+    pdfUrl:"/docs/quantum-sleep-prd.pdf",
+    pdfLabel:"Full PRD"
   }
 ];
 
@@ -63,7 +85,12 @@ function CaseCard({ c }) {
     <div style={{ background: "#1a1a1a", border: `1px solid ${open ? "rgba(255,77,0,0.4)" : "rgba(255,255,255,0.08)"}`, borderRadius: 6, overflow: "hidden", transition: "border-color 0.2s" }}>
       <div style={{ height: 100, background: c.bg, position: "relative", display: "flex", alignItems: "flex-end", padding: "0 16px 14px" }}>
         <span style={{ position: "absolute", right: 12, top: 4, fontSize: 60, fontWeight: 800, color: "#fff", opacity: 0.07, lineHeight: 1 }}>{c.num}</span>
-        <span style={{ fontSize: 10, color: A, background: "rgba(255,77,0,0.15)", padding: "3px 9px", borderRadius: 2, border: "1px solid rgba(255,77,0,0.3)", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>{c.label}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ fontSize: 10, color: A, background: "rgba(255,77,0,0.15)", padding: "3px 9px", borderRadius: 2, border: "1px solid rgba(255,77,0,0.3)", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>{c.label}</span>
+          {c.pdfUrl && (
+            <span style={{ fontSize: 10, color: A2, background: "rgba(255,209,102,0.12)", padding: "3px 9px", borderRadius: 2, border: "1px solid rgba(255,209,102,0.3)", fontWeight: 700, letterSpacing: "0.08em" }}>📄 LIVE SAMPLE</span>
+          )}
+        </div>
       </div>
       <div style={{ padding: "16px 18px" }}>
         <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 8, color: "#f0ede8", lineHeight: 1.3 }}>{c.title}</div>
@@ -75,15 +102,35 @@ function CaseCard({ c }) {
             </div>
           ))}
         </div>
-        <button onClick={() => setOpen(!open)} style={{
-          width: "100%", background: "none", border: `1px solid ${open ? "rgba(255,77,0,0.35)" : "rgba(255,255,255,0.1)"}`,
-          color: open ? "#fff" : "#888", padding: "7px 12px", borderRadius: 2, cursor: "pointer",
-          fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
-          display: "flex", justifyContent: "space-between", alignItems: "center"
-        }}>
-          {open ? "Hide Detail" : "View Full Case Study"}
-          <span style={{ transform: open ? "rotate(180deg)" : "none", transition: "transform 0.25s", display: "inline-block" }}>▼</span>
-        </button>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <button onClick={() => setOpen(!open)} style={{
+            width: "100%", background: "none", border: `1px solid ${open ? "rgba(255,77,0,0.35)" : "rgba(255,255,255,0.1)"}`,
+            color: open ? "#fff" : "#888", padding: "7px 12px", borderRadius: 2, cursor: "pointer",
+            fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
+            display: "flex", justifyContent: "space-between", alignItems: "center"
+          }}>
+            {open ? "Hide Detail" : "View Full Case Study"}
+            <span style={{ transform: open ? "rotate(180deg)" : "none", transition: "transform 0.25s", display: "inline-block" }}>▼</span>
+          </button>
+          {c.pdfUrl && (
+            <a
+              href={c.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
+                padding: "7px 12px", borderRadius: 2, border: "1px solid rgba(255,209,102,0.35)",
+                color: A2, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em",
+                textTransform: "uppercase", textDecoration: "none",
+                background: "rgba(255,209,102,0.06)", transition: "background 0.2s"
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = "rgba(255,209,102,0.12)"}
+              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,209,102,0.06)"}
+            >
+              📄 {c.pdfLabel || "View Live Sample"} ↗
+            </a>
+          )}
+        </div>
       </div>
       {open && (
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "14px 18px", background: "rgba(0,0,0,0.25)" }}>
@@ -115,6 +162,14 @@ export default function Portfolio() {
           {[["#experience","Experience"],["#cases","Case Studies"],["#skills","Skills"]].map(([href,lbl]) => (
             <a key={href} href={href} style={{ color: "#666", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none" }}>{lbl}</a>
           ))}
+          <a
+            href="/docs/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none", border: "1px solid rgba(255,255,255,0.12)", padding: "6px 14px", borderRadius: 2 }}
+          >
+            Resume ↓
+          </a>
           <a href="#contact" style={{ background: A, color: "#fff", padding: "7px 16px", borderRadius: 2, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textDecoration: "none" }}>Hire Me</a>
         </div>
       </div>
@@ -174,7 +229,10 @@ export default function Portfolio() {
         {/* CASE STUDIES */}
         <div id="cases" style={{ marginBottom: 60 }}>
           <div style={{ fontSize: 10, color: A, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 6 }}>WORK</div>
-          <h2 style={{ fontWeight: 800, fontSize: 30, letterSpacing: "-0.02em", marginBottom: 28 }}>Case <span style={{ color: A }}>Studies</span></h2>
+          <h2 style={{ fontWeight: 800, fontSize: 30, letterSpacing: "-0.02em", marginBottom: 12 }}>Case <span style={{ color: A }}>Studies</span></h2>
+          <p style={{ fontSize: 13, color: "#666", marginBottom: 28 }}>
+            Cards marked <span style={{ color: A2, fontWeight: 700 }}>📄 LIVE SAMPLE</span> include the actual deliverable — open it directly from the card.
+          </p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 14 }}>
             {cases.map((c, i) => <CaseCard key={i} c={c} />)}
           </div>
@@ -215,7 +273,7 @@ export default function Portfolio() {
         {/* CONTACT */}
         <div id="contact">
           <div style={{ fontSize: 10, color: A, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 6 }}>GET IN TOUCH</div>
-          <h2 style={{ fontWeight: 800, fontSize: 30, letterSpacing: "-0.02em", marginBottom: 28 }}>Let's <span style={{ color: A }}>Work Together</span></h2>
+          <h2 style={{ fontWeight: 800, fontSize: 30, letterSpacing: "-0.02em", marginBottom: 28 }}>Let’s <span style={{ color: A }}>Work Together</span></h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 48 }}>
             <div>
               <p style={{ color: "#999", lineHeight: 1.8, marginBottom: 20, fontSize: 14 }}>Open to Senior AI PM roles, fractional product leadership, and advisory engagements in AI/ML platforms, enterprise SaaS, fintech, and API-first products.</p>
